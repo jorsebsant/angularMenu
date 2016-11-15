@@ -1,0 +1,45 @@
+<!DOCTYPE html >
+<html ng-app="menuApp">
+<head>
+	<title></title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+	<script src="app.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/stylesheets/menu.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900" rel="stylesheet">
+</head>
+<body ng-controller="contentController">
+<div class="container">
+	<div class="menu">
+		<!--Cambiar icono de la hamburguesa según el estado-->
+		<i class="icon-menu" ng-click="hamburguer= ! hamburguer" ng-class="{'icon-cross': hamburguer,'icon-menu': ! hamburguer}"></i>
+		<div class="titulo-articulo">
+			<span ng-class="{'hidden': ! hamburguer}">{{title}}</span>
+		</div>
+	</div>
+
+	<div class="content">
+		<!--Recorrer Noticias-->
+		<!--Clases slide in y slide Out para manejar los eventos de la hamburguesa-->
+		<div ng-repeat="new in news" class="new" ng-class="{'slide-in' :  hamburguer == true , 'slide-out' :   hamburguer == false}">
+			<div class="header-content"> 
+				<!--Mostrar u ocultar informacion-->
+				<div class="icon" ng-click="show = ! show; titleChange(new.title)" >
+					<i class="icon-file-text"></i>
+				</div>
+				<h4>{{new.title}}</h4>
+			</div>
+			<!--clase hidden dependiente de la variable show para transición-->
+			<div class="more" ng-class="{'hidden' : ! show}">
+				<div class="imagen">
+					<img src="{{new.image}}">
+				</div>	
+				<div class="text">
+					<p>{{new.content}}</p>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>	
+</body>
+</html>
